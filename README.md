@@ -18,4 +18,4 @@ Note: avoid using `type` as a column name in models. More on that will come late
 4. Pagination and search.
 5. Bootstrapped.
 
-http://www.code-snippets-kaia.herokuapp.com
+http://code-snippets-kaia.herokuapp.com
