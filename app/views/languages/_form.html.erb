@@ -1,0 +1,17 @@
+<%= form_for(@language) do |f| %>
+  <% if @language.errors.any? %>
+      <p><%= pluralize(@language.errors.count, "error") %> prohibited this language from being saved:</p>
+
+      <ul>
+      <% @language.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <%= f.submit "Add Language", class: "btn btn-primary" %>
+<% end %>

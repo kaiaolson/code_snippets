@@ -5,7 +5,7 @@
   <% if user_signed_in? %>
   <button class="btn btn-default"><%= link_to "User Snippets", user_snippets: true %></button>
   <% end %>
-  <% Language.all.each do |lang| %>
+  <% Language.all.order(:name).each do |lang| %>
     <button class="btn btn-default"><%= link_to "#{lang.name} (#{CodeSnippet.language_count(lang, current_user)})", filter: "#{lang.id}"%></button>
   <% end %>
 </div>

@@ -1,19 +1,17 @@
 <%= form_for(@code_snippet) do |f| %>
   <% if @code_snippet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@code_snippet.errors.count, "error") %> prohibited this code_snippet from being saved:</h2>
-
+      <p><%= pluralize(@code_snippet.errors.count, "error") %> prohibited this code_snippet from being saved:</p>
       <ul>
       <% @code_snippet.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
-    </div>
   <% end %>
 
   <div class="form-group">
     <%= f.label :language_id %><br>
     <%= f.collection_select(:language_id, Language.order("name"), :id, :name, class: "form-control")  %>
+    <%= link_to "Add Language", new_language_path %>
   </div>
   <div class="form-group">
     <%= f.label :title %>
