@@ -1,0 +1,55 @@
+<h1>All Code Snippets</h1>
+
+<div class="btn-group">
+  <button class="btn btn-default"><%= link_to "All" %></button>
+  <% if user_signed_in? %>
+  <button class="btn btn-default"><%= link_to "User Snippets", user_snippets: true %></button>
+  <% end %>
+  <% Language.all.each do |lang| %>
+    <button class="btn btn-default"><%= link_to "#{lang.name} (#{CodeSnippet.language_count(lang, current_user)})", filter: "#{lang.id}"%></button>
+  <% end %>
+</div>
+<p>&nbsp;</p>
+
+
+<% if @code_snippets %>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @code_snippets.each do |code_snippet| %>
+      <% if can? :read, code_snippet %>
+        <tr>
+          <td><%= code_snippet.language_name %></td>
+          <td><%= code_snippet.title %></td>
+          <td>
+            <div class="btn-group">
+              <%= link_to 'Show', code_snippet, class: "btn btn-info"  %>
+              <% if can? :edit, code_snippet %>
+                <%= link_to "Edit", edit_code_snippet_path(code_snippet), class: "btn btn-warning" %>
+              <% end %>
+              <% if can? :destroy, code_snippet %>
+              <%= link_to "Delete", code_snippet_path(code_snippet), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure you want to delete this snippet?"} %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<div class="text-center"><%= paginate @code_snippets, theme: 'bootstrap3' %></div>
+
+<% else %>
+<div class="alert alert-danger">No User Snippets!</div>
+
+<% end %>
+
+<% if can? :create, CodeSnippet %>
+<%= link_to 'New Code snippet', new_code_snippet_path, class: "btn btn-primary" %>
+<% end %>

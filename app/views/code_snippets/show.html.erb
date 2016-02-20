@@ -1,0 +1,21 @@
+<p>
+  <strong>Language:</strong>
+  <%= @code_snippet.language_name %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @code_snippet.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= markdown(@code_snippet.body) %>
+</p>
+
+<div class="btn-group">
+  <% if can? :edit, @code_snippet %>
+    <%= link_to 'Edit', edit_code_snippet_path(@code_snippet), class: "btn btn-warning" %>
+  <% end %>
+  <%= link_to 'Back', code_snippets_path, class: "btn btn-primary" %>
+</div>
