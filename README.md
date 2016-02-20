@@ -11,7 +11,7 @@ Note: avoid using `type` as a column name in models. More on that will come late
 
 [Stretch] Make snippets owned by users so a user can create their own snippets. Also add `private` checkbox to the snippet code. If the code snippet is private only the user can see it. If the snippet is not private it means it's public and it will show on the home page listing where it will list all the snippets for all the users.
 
-## Additional Features Added for Fun
+## Additional Features (added just for fun)
 1. Users can see a list of the snippets they own.
 2. Dynamically generated list of languages that filter the snippets upon click.
 3. Display count of each language; if a snippet is private, only adds to the count when the snippet owner is signed in.
