@@ -17,3 +17,5 @@ Note: avoid using `type` as a column name in models. More on that will come late
 3. Display count of each language; if a snippet is private, only adds to the count when the snippet owner is signed in.
 4. Pagination and search.
 5. Bootstrapped.
+
+http://www.code-snippets-kaia.herokuapp.com
