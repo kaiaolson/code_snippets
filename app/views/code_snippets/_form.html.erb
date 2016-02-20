@@ -12,20 +12,24 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :language_id %>
+    <%= f.label :language_id %><br>
     <%= f.collection_select(:language_id, Language.order("name"), :id, :name, class: "form-control")  %>
   </div>
   <div class="form-group">
-    <%= f.label :title %><br>
+    <%= f.label :title %>
     <%= f.text_field :title, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :body %><br>
-    <%= f.text_area :body, class: "form-control" %>
+    <%= f.label :body %>
+    <%= f.text_area :body, rows: 8, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :privacy %><br>
-    <%= f.check_box :privacy, class: "form-control" %>
+    <div class="checkbox">
+      <label for="privacy">
+        <%= f.check_box :privacy%>
+        <strong>Private?</strong>
+      </label>
+    </div>
   </div>
   <div class="form-group">
     <%= f.submit class: "btn btn-primary" %>
