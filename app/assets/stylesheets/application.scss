@@ -19,8 +19,11 @@ body {
   padding: 20px 0px;
 }
 
-textarea, input {
+input {
   max-width: 400px;
+}
+textarea {
+  max-width: 600px;
 }
 .signup {
   padding:7px 15px !important;

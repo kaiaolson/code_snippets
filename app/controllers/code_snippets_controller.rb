@@ -1,6 +1,6 @@
 class CodeSnippetsController < ApplicationController
-  before_action :find_code_snippet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user, except: [:index, :show]
+  before_action :find_user_code_snippet, only: [:update, :destroy]
 
   def index
     case
@@ -18,6 +18,7 @@ class CodeSnippetsController < ApplicationController
   end
 
   def show
+    find_code_snippet
   end
 
   def new
@@ -36,11 +37,12 @@ class CodeSnippetsController < ApplicationController
   end
 
   def edit
+    find_code_snippet
   end
 
   def update
-    if @code_snippet.update code_snippet_params
-      redirect_to @code_snippet, notice: "Code snippet was successfully updated."
+    if @user_code_snippet.update code_snippet_params
+      redirect_to @user_code_snippet, notice: "Code snippet was successfully updated."
     else
       render :edit
       flash[:alert] = "Code snippet not updated!"
@@ -48,8 +50,7 @@ class CodeSnippetsController < ApplicationController
   end
 
   def destroy
-    user_code_snippet
-    @code_snippet.destroy
+    @user_code_snippet.destroy
     redirect_to code_snippets_url, notice: "Code snippet was successfully destroyed."
   end
 
@@ -63,7 +64,7 @@ class CodeSnippetsController < ApplicationController
     params.require(:code_snippet).permit(:title, :body, :privacy, :language_id, :user_id)
   end
 
-  def user_code_snippet
+  def find_user_code_snippet
     @user_code_snippet ||= current_user.code_snippets.find(params[:id])
   end
 end
