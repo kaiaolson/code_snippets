@@ -29,6 +29,7 @@
   $('.show-raw').on('click', function(event){
     event.preventDefault();
     $('#raw-body').toggle();
-    $('.show-raw').html('Show Raw' ? 'Hide Raw' : 'Show Raw');
+    $('.show-raw').html($('.show-raw').text() == 'Show Raw' ? 'Hide Raw' : 'Show Raw');
+
   });
 </script>
