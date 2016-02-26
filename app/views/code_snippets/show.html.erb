@@ -13,9 +13,22 @@
   <%= markdown(@code_snippet.body) %>
 </p>
 
+<p id="raw-body" style="display:none;">
+  <%= @code_snippet.body %>
+</p>
+<%= link_to "Show Raw", root_path, class: "btn btn-default navbar-btn signup show-raw" %>
+
 <div class="btn-group">
   <% if can? :edit, @code_snippet %>
     <%= link_to 'Edit', edit_code_snippet_path(@code_snippet), class: "btn btn-warning" %>
   <% end %>
   <%= link_to 'Back', code_snippets_path, class: "btn btn-primary" %>
 </div>
+
+<script>
+  $('.show-raw').on('click', function(event){
+    event.preventDefault();
+    $('#raw-body').toggle();
+    $(this).html("Hide Raw");
+  });
+</script>

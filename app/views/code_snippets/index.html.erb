@@ -1,12 +1,12 @@
 <h1>All Code Snippets</h1>
 
 <div class="btn-group">
-  <button class="btn btn-default"><%= link_to "All" %></button>
+  <%= link_to "All", code_snippets_path, class: "btn btn-default navbar-btn signup" %>
   <% if user_signed_in? %>
-  <button class="btn btn-default"><%= link_to "User Snippets", user_snippets: true %></button>
+  <%= link_to "User Snippets", code_snippets_path(user_snippets: true), class: "btn btn-default navbar-btn signup" %>
   <% end %>
   <% Language.all.order(:name).each do |lang| %>
-    <button class="btn btn-default"><%= link_to "#{lang.name} (#{CodeSnippet.language_count(lang, current_user)})", filter: "#{lang.id}"%></button>
+    <%= link_to "#{lang.name} (#{CodeSnippet.language_count(lang, current_user)})", code_snippets_path(filter: "#{lang.id}"), class: "btn btn-default navbar-btn signup" %>
   <% end %>
 </div>
 <p>&nbsp;</p>
