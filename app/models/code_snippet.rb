@@ -12,10 +12,13 @@ class CodeSnippet < ActiveRecord::Base
     language.name
   end
 
+  def user_full_name
+    user.full_name
+  end
+
   def self.language_count(language, user)
     private_count = where(language: language, privacy: true, user: user).length
     public_count = where(language: language, privacy: false).length
     (private_count > 0 ) ? (private_count + public_count) : public_count
   end
-
 end
