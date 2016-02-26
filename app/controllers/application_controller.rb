@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     code_snippets.each do |snippet|
       new_code_snippets << snippet if can? :read, snippet
     end
-    @code_snippets = Kaminari.paginate_array(new_code_snippets).page(params[:page]).per(5)
+    @code_snippets = Kaminari.paginate_array(new_code_snippets).page(params[:page]).per(20)
   end
 
   # helper methods

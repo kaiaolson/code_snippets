@@ -16,7 +16,7 @@
 <p id="raw-body" style="display:none;">
   <%= @code_snippet.body %>
 </p>
-<%= link_to "Show Raw", root_path, class: "btn btn-default navbar-btn signup show-raw" %>
+<%= link_to "Show Raw", code_snippet_path(@code_snippet), class: "btn btn-default navbar-btn signup show-raw" %>
 
 <div class="btn-group">
   <% if can? :edit, @code_snippet %>
@@ -29,6 +29,6 @@
   $('.show-raw').on('click', function(event){
     event.preventDefault();
     $('#raw-body').toggle();
-    $(this).html("Hide Raw");
+    $('.show-raw').html('Show Raw' ? 'Hide Raw' : 'Show Raw');
   });
 </script>
