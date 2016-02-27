@@ -8,6 +8,20 @@ class CodeSnippet < ActiveRecord::Base
     where("title || body ILIKE ?","%#{term}%")
   end
 
+  def self.filter(filter, value)
+    where("#{filter} = ?", value)
+  end
+
+  def self.sort(field, direction)
+    order("#{field} #{direction}")
+  end
+
+  def self.language_count(language, user)
+    private_count = where(language: language, privacy: true, user: user).length
+    public_count = where(language: language, privacy: false).length
+    (private_count > 0 ) ? (private_count + public_count) : public_count
+  end
+
   def language_name
     language.name
   end
@@ -16,9 +30,4 @@ class CodeSnippet < ActiveRecord::Base
     user.full_name
   end
 
-  def self.language_count(language, user)
-    private_count = where(language: language, privacy: true, user: user).length
-    public_count = where(language: language, privacy: false).length
-    (private_count > 0 ) ? (private_count + public_count) : public_count
-  end
 end

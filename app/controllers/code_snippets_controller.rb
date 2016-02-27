@@ -8,10 +8,13 @@ class CodeSnippetsController < ApplicationController
       session[:q] = params[:q]
       code_snippets = CodeSnippet.search(session[:q])
     when params[:filter]
-      code_snippets = CodeSnippet.where(language: params[:filter])
-    when params[:user_snippets]
-      code_snippets = CodeSnippet.where(user_id: current_user.id)
+      session[:filter], session[:filter_id] = params[:filter], params[:filter_id]
+      code_snippets = CodeSnippet.filter(session[:filter], session[:filter_id])
+    when params[:sort_by]
+      code_snippets = CodeSnippet.sort(params[:sort_by], params[:direction])
+      code_snippets = code_snippets.filter(session[:filter], session[:filter_id]) if session[:filter]
     else
+      session[:filter], session[:filter_id] = nil
       code_snippets = CodeSnippet.all
     end
     authorized_count(code_snippets)

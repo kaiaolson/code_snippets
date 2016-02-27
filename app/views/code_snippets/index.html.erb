@@ -3,10 +3,10 @@
 <div class="btn-group">
   <%= link_to "All", code_snippets_path, class: "btn btn-default navbar-btn signup" %>
   <% if user_signed_in? %>
-  <%= link_to "User Snippets", code_snippets_path(user_snippets: true), class: "btn btn-default navbar-btn signup" %>
+  <%= link_to "User Snippets", code_snippets_path(filter: 'user_id', filter_id: current_user.id), class: "btn btn-default navbar-btn signup" %>
   <% end %>
   <% Language.all.order(:name).each do |lang| %>
-    <%= link_to "#{lang.name} (#{CodeSnippet.language_count(lang, current_user)})", code_snippets_path(filter: "#{lang.id}"), class: "btn btn-default navbar-btn signup" %>
+    <%= link_to "#{lang.name} (#{CodeSnippet.language_count(lang, current_user)})", code_snippets_path(filter: "language_id", filter_id: "#{lang.id}"), class: "btn btn-default navbar-btn signup" %>
   <% end %>
 </div>
 <p>&nbsp;</p>
@@ -16,8 +16,8 @@
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th>Language</th>
-      <th>Title</th>
+      <th><%= link_to "Language", code_snippets_path(sort_by: "language_id", direction: "ASC") %></th>
+      <th><%= link_to "Title", code_snippets_path(sort_by: "title", direction: "ASC") %></th>
       <th>Actions</th>
     </tr>
   </thead>
